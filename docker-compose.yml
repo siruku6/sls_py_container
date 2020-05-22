@@ -8,10 +8,13 @@ services:
     environment:
       TZ: "Asia/Tokyo"
     ports:
-      - 80:80
-      - 5000:5000
+      - 222:222
     volumes:
+      # 開発用ディレクトリ
       - ./opt:/home/lab/opt
+      # gitの設定をcontainerにコピー
       - ./conf/gitconfig:/root/.gitconfig:ro
     env_file:
       - ./conf/env_for_container.env
+    # container起動したら、sshdがフォアグラウンドで実行され、入力を受け付けないが、sshログインできるようになる
+    command: /usr/sbin/sshd -D
