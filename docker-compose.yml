@@ -1,0 +1,17 @@
+version: "3.0"
+services:
+  app:
+    image: python_3.8.1
+    container_name: python_3.8.1
+    build:
+      context: ./containers/python
+    environment:
+      TZ: "Asia/Tokyo"
+    ports:
+      - 80:80
+      - 5000:5000
+    volumes:
+      - ./opt:/home/lab/opt
+      - ./conf/gitconfig:/root/.gitconfig:ro
+    env_file:
+      - ./conf/env_for_container.env

@@ -1,0 +1,32 @@
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    editor = vim -c \"set fenc=utf-8\"
+[user]
+    email = sirukufarios@gmail.com
+    name = Seiya Sasaki
+[color]
+    ui = true
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    a = add
+    b = branch
+    c = checkout
+    cd = checkout develop
+    cm = commit
+    d = diff
+    dh = diff HEAD
+    fs = flow feature start
+    l = log
+    lo = log --oneline
+    lp = log -p
+    m = merge
+    pl = pull
+    ps = push
+    pg = push github
+    s = status
