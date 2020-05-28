@@ -10,11 +10,14 @@ services:
     ports:
       - 222:222
     volumes:
+      # VSCode の拡張などの情報は docker 外に保持する
+      - ./volumes/vscode-server:/root/.vscode-server
       # 開発用ディレクトリ
-      - ./opt:/home/lab/opt
-      # gitの設定をcontainerにコピー
+      - ./volumes/opt:/home/lab/opt
+
+      # git の設定を container 内へコピー
       - ./conf/gitconfig:/root/.gitconfig:ro
     env_file:
       - ./conf/env_for_container.env
-    # container起動したら、sshdがフォアグラウンドで実行され、入力を受け付けないが、sshログインできるようになる
+    # container 起動時に sshd がフォアグラウンドで実行されるために入力を受け付けないが、ssh ログインできるようになる
     command: /usr/sbin/sshd -D
