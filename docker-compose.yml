@@ -6,7 +6,7 @@ services:
     build:
       context: ./containers/python
     environment:
-      TZ: "Asia/Tokyo"
+      - TZ=Asia/Tokyo
     ports:
       - 222:222
     volumes:
@@ -15,9 +15,14 @@ services:
       # 開発用ディレクトリ
       - ./volumes/opt:/home/lab/opt
 
-      # git の設定を container 内へコピー
+      # 各種設定を container へコピー
+      - ./conf/.bash_profile:/root/.bash_profile
       - ./conf/gitconfig:/root/.gitconfig:ro
-    env_file:
-      - ./conf/env_for_container.env
-    # container 起動時に sshd がフォアグラウンドで実行されるために入力を受け付けないが、ssh ログインできるようになる
-    command: /usr/sbin/sshd -D
+
+    # INFO: /user/sbin/sshd -D について
+    #   container 起動時に sshd がフォアグラウンドで実行され、ssh ログインできるようになる
+    command: bash -c "
+        echo \"export PASSWORD=${PASSWORD}\" >> ~/.bashrc
+        && . ~/.bash_profile
+        && /usr/sbin/sshd -D
+      "

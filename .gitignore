@@ -1,6 +1,5 @@
-conf/env_for_container.env
+.env
 opt/*
 !opt/.keep
 volumes/*
 !volumes/.keep
-
