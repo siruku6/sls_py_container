@@ -1,25 +1,31 @@
 version: "3.0"
 services:
-  app:
-    image: python_3.8.1
-    container_name: python_3.8.1
+  virtualhost:
+    container_name: python_virtualhost
     build:
-      context: ./containers/python
+      context: ./docker/virtualhost
+      args:
+        PYTHON_VER: ${PYTHON_VERSION}
+        SSH_PORT: ${VIRTUAL_HOST_SSH_PORT}
     environment:
       - TZ=Asia/Tokyo
+    # NOTE: env_file is not necessary if you use only .env as env_file.
+    # env_file:
+    #   - .env
     ports:
-      - 222:222
+      - ${OPEN_PORT}:${OPEN_PORT}
+      - ${VIRTUAL_HOST_SSH_PORT}:${VIRTUAL_HOST_SSH_PORT}
     volumes:
-      # VSCode の拡張などの情報は docker 外に保持する
+      # The data for VSCode extension
       - ./volumes/vscode-server:/root/.vscode-server
-      # 開発用ディレクトリ
-      - ./volumes/opt:/home/lab/opt
+      # The directory for development
+      - ./volumes/opt:/root/lab/opt
 
       # 各種設定を container へコピー
       - ./conf/.bash_profile:/root/.bash_profile
       - ./conf/gitconfig:/root/.gitconfig:ro
 
-    # INFO: /user/sbin/sshd -D について
+    # NOTE: /user/sbin/sshd -D について
     #   container 起動時に sshd がフォアグラウンドで実行され、ssh ログインできるようになる
     command: bash -c "
         echo \"export PASSWORD=${PASSWORD}\" >> ~/.bashrc
