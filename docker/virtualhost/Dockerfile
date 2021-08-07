@@ -5,7 +5,9 @@ RUN apt update \
     && apt upgrade -y \
     # install packages for development
     && apt -y install --no-install-recommends \
-           vim openssh-server \
+           vim \
+           openssh-server \
+           net-tools \
     # Delete cache to minimize the size of this image
     && rm -rf /var/lib/apt/lists/* \
     && apt -y clean \
