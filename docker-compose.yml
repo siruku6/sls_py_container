@@ -16,6 +16,8 @@ services:
       - ${OPEN_PORT}:${OPEN_PORT}
       - ${VIRTUAL_HOST_SSH_PORT}:${VIRTUAL_HOST_SSH_PORT}
     volumes:
+      # Pip modules
+      - pip-modules:/usr/local/lib/${PIP_MODULES_DIRECTORY}/site-packages
       # The data for VSCode extension
       - ./volumes/vscode-server:/root/.vscode-server
       # The directory for development
@@ -32,3 +34,8 @@ services:
         && . ~/.bash_profile
         && /usr/sbin/sshd -D
       "
+
+volumes:
+  pip-modules:
+    external:
+      name: pip-modules

@@ -17,6 +17,8 @@ You need to use the following packages on your OS.
 
 ```bash
 $ cp .env.example .env
+
+$ docker volume create --name=pip-modules
 $ docker-compose build
 $ docker-compose up
 ```
