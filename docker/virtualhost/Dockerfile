@@ -16,7 +16,6 @@ RUN apt update \
 
 # for ssh login: The opened port No is ${SSH_PORT}
 ARG SSH_PORT
-ENV SSH_PORT=${SSH_PORT}
 RUN { \
     mkdir /var/run/sshd; \
     echo 'root:password' | chpasswd; \
