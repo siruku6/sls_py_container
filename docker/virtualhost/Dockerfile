@@ -5,14 +5,16 @@ RUN apt update \
     && apt upgrade -y \
     # install packages for development
     && apt -y install --no-install-recommends \
-           vim \
+           # NOTE: less enables you to scroll per a line when running 'git diff'
+           less vim \
            openssh-server \
            net-tools \
     # Delete cache to minimize the size of this image
     && rm -rf /var/lib/apt/lists/* \
     && apt -y clean \
     # for updating python module
-    && pip install --upgrade pip
+    && pip install --upgrade pip \
+    && pip install pipenv
 
 # for ssh login: The opened port No is ${SSH_PORT}
 ARG SSH_PORT
@@ -27,8 +29,13 @@ RUN { \
 
 RUN { \
     echo "alias g='git'"; \
-    echo "alias ll='ls $LS_OPTIONS -l'"; \
-    echo "alias l='ls $LS_OPTIONS -lA'"; \
+    echo "alias ls='ls $LS_OPTIONS --color=auto'"; \
+    echo "alias ll='ls -alF'"; \
+    echo "alias la='ls -A'"; \
+    echo "alias l='ls -CF'"; \
+    echo "alias grep='grep --color=auto'"; \
+    echo "alias fgrep='fgrep --color=auto'"; \
+    echo "alias egrep='egrep --color=auto'"; \
 } >> ~/.bashrc
 RUN . ~/.bashrc
 
