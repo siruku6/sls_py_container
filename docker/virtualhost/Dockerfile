@@ -16,17 +16,6 @@ RUN apt update \
     && pip install --upgrade pip \
     && pip install pipenv
 
-# for ssh login: The opened port No is ${SSH_PORT}
-ARG SSH_PORT
-RUN { \
-    mkdir /var/run/sshd; \
-    echo 'root:password' | chpasswd; \
-    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd; \
-    sed -i '/pam_loginuid\.so/s/required/optional/' /etc/pam.d/sshd; \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config; \
-    sed -i "s/#Port 22/Port ${SSH_PORT}/" /etc/ssh/sshd_config; \
-}
-
 RUN { \
     echo "alias g='git'"; \
     echo "alias ls='ls $LS_OPTIONS --color=auto'"; \
@@ -38,5 +27,25 @@ RUN { \
     echo "alias egrep='egrep --color=auto'"; \
 } >> ~/.bashrc
 RUN . ~/.bashrc
+
+# for ssh login: The opened port No is ${SSH_PORT}
+ARG SSH_PORT
+RUN { \
+    mkdir /var/run/sshd; \
+    echo 'root:password' | chpasswd; \
+    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd; \
+    sed -i '/pam_loginuid\.so/s/required/optional/' /etc/pam.d/sshd; \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config; \
+    sed -i "s/#Port 22/Port ${SSH_PORT}/" /etc/ssh/sshd_config; \
+}
+
+ARG PERSONAL_ACCESS_TOKEN
+RUN if [ "${PERSONAL_ACCESS_TOKEN}" ]; \
+    then \
+        touch /root/.netrc; \
+        echo 'machine github.com' >> /root/.netrc; \
+        echo "  login ${PERSONAL_ACCESS_TOKEN}" >> /root/.netrc; \
+        echo '  password x-oauth-basic' >> /root/.netrc; \
+    fi
 
 WORKDIR /root/lab

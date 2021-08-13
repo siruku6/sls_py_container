@@ -7,6 +7,7 @@ services:
       args:
         PYTHON_VER: ${PYTHON_VERSION}
         SSH_PORT: ${VIRTUAL_HOST_SSH_PORT}
+        PERSONAL_ACCESS_TOKEN: ${PERSONAL_ACCESS_TOKEN}
     environment:
       - TZ=Asia/Tokyo
     # NOTE: env_file is not necessary if you use only .env as env_file.
