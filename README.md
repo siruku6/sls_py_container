@@ -18,6 +18,11 @@ You need to use the following packages on your OS.
 ```bash
 $ cp .env.example .env
 
+$ cp docker-compose.yml docker-compose.override.yml
+
+# Edit docker-compose.override.yml
+# For example, comment in the section of 'dynamodb'
+
 $ docker volume create --name=pip-modules
 $ docker-compose build
 $ docker-compose up
