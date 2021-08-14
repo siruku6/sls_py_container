@@ -1,4 +1,4 @@
-version: "3.0"
+version: '3.7'
 services:
   virtualhost:
     container_name: python_virtualhost
@@ -35,6 +35,12 @@ services:
         && . ~/.bash_profile
         && /usr/sbin/sshd -D
       "
+
+  # dynamodb:
+  #   image: amazon/dynamodb-local:latest
+  #   container_name: dynamodb
+  #   ports:
+  #     - "8000:8000"
 
 volumes:
   pip-modules:
