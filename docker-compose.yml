@@ -31,11 +31,9 @@ services:
     # NOTE: /user/sbin/sshd -D について
     #   container 起動時に sshd がフォアグラウンドで実行され、ssh ログインできるようになる
     command: >
-      bash -c "
-        echo \"export PASSWORD=${PASSWORD}\" >> ~/.bashrc
-        && . ~/.bash_profile
-        && /usr/sbin/sshd -D
-      "
+      bash -c "echo \"export PASSWORD=${PASSWORD}\" >> ~/.bashrc
+      && . ~/.bash_profile
+      && /usr/sbin/sshd -D"
 
   # dynamodb:
   #   image: amazon/dynamodb-local:latest
