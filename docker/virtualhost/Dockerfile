@@ -9,6 +9,9 @@ RUN apt update \
            less vim \
            openssh-server \
            net-tools \
+           # For scipy 1.4.1 (is not necessary for scipy 1.7.1)
+           # https://stackoverflow.com/questions/14408123/installing-scipy-on-ubuntu/14408210
+           libblas-dev liblapack-dev libatlas-base-dev gfortran \
     # Delete cache to minimize the size of this image
     && rm -rf /var/lib/apt/lists/* \
     && apt -y clean \
