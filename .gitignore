@@ -1,6 +1,7 @@
 .env
 docker-compose.override.yml
-opt/*
-!opt/.keep
-volumes/*
-!volumes/.keep
+
+volumes/opt/*
+!volumes/opt/.keep
+volumes/pip/*
+!volumes/pip/.keep

@@ -13,6 +13,9 @@
     added = yellow
     changed = green
     untracked = cyan
+[diff]
+    algorithm = histogram
+    colorMoved = dimmed-zebra
 [alias]
     a = add
     b = branch
@@ -30,3 +33,4 @@
     ps = push
     pg = push github
     s = status
+    sth = stash

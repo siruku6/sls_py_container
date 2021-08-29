@@ -17,12 +17,12 @@ services:
       - ${OPEN_PORT}:${OPEN_PORT}
       - ${VIRTUAL_HOST_SSH_PORT}:${VIRTUAL_HOST_SSH_PORT}
     volumes:
-      # Pip modules
-      - pip-modules:/usr/local/lib/${PIP_MODULES_DIRECTORY}/site-packages
-      # The data for VSCode extension
-      - ./volumes/vscode-server:/root/.vscode-server
       # The directory for development
       - ./volumes/opt:/root/lab/opt
+      # Pip modules
+      - ./volumes/pip:/root/.local/share
+      # The data for VSCode extension
+      - ./volumes/vscode-server:/root/.vscode-server
 
       # 各種設定を container へコピー
       - ./conf/.bash_profile:/root/.bash_profile
@@ -54,9 +54,6 @@ services:
   #     - dynamodb-local
 
 
-volumes:
-  pip-modules:
-    external:
-      name: pip-modules
-  # dynamodb:
-  #   driver: local
+# volumes:
+#   dynamodb:
+#     driver: local
