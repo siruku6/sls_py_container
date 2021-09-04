@@ -1,5 +1,10 @@
-ARG PYTHON_VER
-FROM python:${PYTHON_VER}
+FROM node:16.8.0-slim as node
+
+FROM python:3.8.1
+
+# Copy node / npm to base image from node image
+COPY --from=node /usr/local/bin/ /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 RUN apt update \
     && apt upgrade -y \
@@ -12,6 +17,11 @@ RUN apt update \
     # Delete cache to minimize the size of this image
     && rm -rf /var/lib/apt/lists/* \
     && apt -y clean \
+    # for install aws-cli
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip && rm awscliv2.zip && ./aws/install \
+    # for install serverless
+    && npm install -g serverless \
     # for updating python module
     && pip install --upgrade pip \
     && pip install pipenv

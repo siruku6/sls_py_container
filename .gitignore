@@ -1,7 +1,10 @@
 .env
 docker-compose.override.yml
 
+conf/aws/config
+conf/aws/credentials
 volumes/opt/*
 !volumes/opt/.keep
 volumes/pip/*
 !volumes/pip/.keep
+

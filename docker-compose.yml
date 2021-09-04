@@ -5,7 +5,6 @@ services:
     build:
       context: ./docker/virtualhost
       args:
-        PYTHON_VER: ${PYTHON_VERSION}
         SSH_PORT: ${VIRTUAL_HOST_SSH_PORT}
         PERSONAL_ACCESS_TOKEN: ${PERSONAL_ACCESS_TOKEN}
     environment:
@@ -27,6 +26,7 @@ services:
       # 各種設定を container へコピー
       - ./conf/.bash_profile:/root/.bash_profile
       - ./conf/gitconfig:/root/.gitconfig:ro
+      - ./conf/aws:/root/.aws
 
     # NOTE: /user/sbin/sshd -D について
     #   container 起動時に sshd がフォアグラウンドで実行され、ssh ログインできるようになる
