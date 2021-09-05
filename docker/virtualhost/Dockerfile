@@ -21,6 +21,7 @@ RUN apt update \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip && rm awscliv2.zip && ./aws/install \
     # for install serverless
+    && npm install -g npm \
     && npm install -g serverless \
     # for updating python module
     && pip install --upgrade pip \

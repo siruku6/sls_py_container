@@ -7,4 +7,4 @@ volumes/opt/*
 !volumes/opt/.keep
 volumes/pip/*
 !volumes/pip/.keep
-
+volumes/vscode-server/*
