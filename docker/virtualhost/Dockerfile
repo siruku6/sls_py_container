@@ -58,5 +58,3 @@ RUN if [ "${PERSONAL_ACCESS_TOKEN}" ]; \
         echo "  login ${PERSONAL_ACCESS_TOKEN}" >> /root/.netrc; \
         echo '  password x-oauth-basic' >> /root/.netrc; \
     fi
-
-WORKDIR /root/lab

@@ -9,6 +9,7 @@ services:
         PERSONAL_ACCESS_TOKEN: ${PERSONAL_ACCESS_TOKEN}
     environment:
       - TZ=Asia/Tokyo
+      - PIPENV_VENV_IN_PROJECT=1
     # NOTE: env_file is not necessary if you use only .env as env_file.
     # env_file:
     #   - .env
@@ -17,9 +18,11 @@ services:
       - ${VIRTUAL_HOST_SSH_PORT}:${VIRTUAL_HOST_SSH_PORT}
     volumes:
       # The directory for development
-      - ./volumes/opt:/root/lab/opt
+      - ./volumes/opt:/root/opt
+      # NOTE: If it were not fot `PIPENV_VENV_IN_PROJECT=1`,
+      #   modules would be gonna be installed in the following directory.
       # Pip modules
-      - ./volumes/pip:/root/.local/share
+      # - ./volumes/pip:/root/.local/share
       # The data for VSCode extension
       - ./volumes/vscode-server:/root/.vscode-server
 
@@ -34,6 +37,7 @@ services:
       bash -c "echo \"export PASSWORD=${PASSWORD}\" >> ~/.bashrc
       && . ~/.bash_profile
       && /usr/sbin/sshd -D"
+    working_dir: /root/opt
 
   # dynamodb:
   #   image: amazon/dynamodb-local:latest
