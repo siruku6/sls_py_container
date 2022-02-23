@@ -14,6 +14,7 @@ RUN apt update \
            less vim \
            openssh-server \
            net-tools \
+           zip \
     # Delete cache to minimize the size of this image
     && rm -rf /var/lib/apt/lists/* \
     && apt -y clean \

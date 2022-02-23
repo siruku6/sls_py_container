@@ -5,6 +5,8 @@ conf/aws/config
 conf/aws/credentials
 volumes/opt/*
 !volumes/opt/.keep
+volumes/vscode-server/*
+
+# NOTE: Now these are not used
 volumes/pip/*
 !volumes/pip/.keep
-volumes/vscode-server/*
