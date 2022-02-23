@@ -6,7 +6,7 @@
     editor = vim -c \"set fenc=utf-8\"
 [user]
     email = sirukufarios@gmail.com
-    name = Seiya Sasaki
+    name = siruku6
 [color]
     ui = true
 [color "status"]
