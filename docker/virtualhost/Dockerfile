@@ -23,7 +23,7 @@ RUN apt update \
     && unzip awscliv2.zip && rm awscliv2.zip && ./aws/install \
     # for install serverless
     && npm install -g npm \
-    && npm install -g serverless \
+    && npm install -g serverless@2 \
     # for updating python module
     && pip install --upgrade pip \
     && pip install pipenv
