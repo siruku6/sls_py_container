@@ -1,6 +1,6 @@
 FROM node:16.8.0-slim as node
 
-FROM python:3.8.1
+FROM python:3.9.10
 
 # Copy node / npm to base image from node image
 COPY --from=node /usr/local/bin/ /usr/local/bin/
