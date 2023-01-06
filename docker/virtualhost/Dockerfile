@@ -1,4 +1,4 @@
-FROM node:16.8.0-slim as node
+FROM node:18.12.1-buster-slim as node
 
 FROM python:3.9.10
 
@@ -23,7 +23,7 @@ RUN apt update \
     && unzip awscliv2.zip && rm awscliv2.zip && ./aws/install \
     # for install serverless
     && npm install -g npm \
-    && npm install -g serverless@2 \
+    && npm install -g serverless@3 \
     # for updating python module
     && pip install --upgrade pip \
     && pip install pipenv
